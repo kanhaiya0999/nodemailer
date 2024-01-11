@@ -13,7 +13,7 @@ const pass = process.env.pass;
 const transporter = nodemailer.createTransport({
   host: host,
   port: port,
-  secure: true,
+  secure: false,
   auth: {
     // TODO: replace `user` and `pass` values from <https://forwardemail.net>
     user: user,
@@ -30,7 +30,7 @@ app.get("/", async function (req: Request, res: Response) {
       .send("email and otp require email as a string and otp as a numbert");
   }
   const messageId = await send_otp(email, otp);
-  app.send(messageId);
+  res.send(messageId);
 });
 
 app.listen(3000);
